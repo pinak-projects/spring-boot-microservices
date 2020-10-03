@@ -1,4 +1,4 @@
-package com.patient.controller;
+package com.doctor.controller;
 
 import java.net.URI;
 import java.text.MessageFormat;
@@ -17,30 +17,30 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseStatus;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.patient.entity.Patient;
-import com.patient.service.IPatientService;
+import com.doctor.entity.Doctor;
+import com.doctor.service.IDoctorService;
 
 @RestController
-@RequestMapping(name = "/patients")
-public class PatientController {
+@RequestMapping(name = "/doctors")
+public class DoctorController {
 
 	@Autowired
-	private IPatientService patientService;
+	private IDoctorService doctorService;
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<String> registerPatient(@Valid @RequestBody Patient patientRequest) {
+	public ResponseEntity<String> registerDoctor(@Valid @RequestBody Doctor doctorRequest) {
 
-		final Patient savedPatient = patientService.savePatient(patientRequest);
-		if (savedPatient.getPatientId() < 1) {
-			throw new RuntimeException("Error in saving patient, please try again");
+		final Doctor savedDoctor = doctorService.saveDoctor(doctorRequest);
+		if (savedDoctor.getDocId() < 1) {
+			throw new RuntimeException("Error in saving doctor, please try again");
 		}
-		URI location = URI.create(MessageFormat.format("/patients/{}", savedPatient.getPatientId()));
-		return ResponseEntity.created(location).body("Patient registered successfully");
+		URI location = URI.create(MessageFormat.format("/doctors/{}", savedDoctor.getDocId()));
+		return ResponseEntity.created(location).body("Doctor registered successfully");
 	}
-	
+
 	@GetMapping
 	@ResponseStatus(value = HttpStatus.OK)
-	public List<Patient> getPatients() {
-		return patientService.getPatientsList();
+	public List<Doctor> getDoctors() {
+		return doctorService.getDoctorsList();
 	}
 }

@@ -1,8 +1,8 @@
-package com.example.patient.service;
+package com.patient.service;
 
 import java.util.List;
 
-import com.example.patient.entity.Patient;
+import com.patient.entity.Patient;
 
 public interface IPatientService {
 

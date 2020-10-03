@@ -1,13 +1,13 @@
-package com.example.patient.service.impl;
+package com.patient.service.impl;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.patient.entity.Patient;
-import com.example.patient.repository.IPatientRepository;
-import com.example.patient.service.IPatientService;
+import com.patient.entity.Patient;
+import com.patient.repository.IPatientRepository;
+import com.patient.service.IPatientService;
 
 @Service
 public class PatientServiceImpl implements IPatientService {
