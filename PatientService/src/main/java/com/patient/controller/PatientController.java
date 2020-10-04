@@ -20,6 +20,9 @@ import org.springframework.web.bind.annotation.RestController;
 import com.patient.entity.Patient;
 import com.patient.service.IPatientService;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @RestController
 @RequestMapping(name = "/patients")
 public class PatientController {
@@ -29,7 +32,7 @@ public class PatientController {
 
 	@PostMapping(consumes = MediaType.APPLICATION_JSON_VALUE, produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<String> registerPatient(@Valid @RequestBody Patient patientRequest) {
-
+		log.info("registerPatient");
 		final Patient savedPatient = patientService.savePatient(patientRequest);
 		if (savedPatient.getPatientId() < 1) {
 			throw new RuntimeException("Error in saving patient, please try again");
@@ -41,6 +44,7 @@ public class PatientController {
 	@GetMapping
 	@ResponseStatus(value = HttpStatus.OK)
 	public List<Patient> getPatients() {
+		log.info("getPatients");
 		return patientService.getPatientsList();
 	}
 }
